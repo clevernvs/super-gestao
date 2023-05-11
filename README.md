@@ -3,7 +3,7 @@
 Essa é uma app monolitica
 
 
-1. Subindo os containers
+### 1. Subindo os containers
 ~~~
 ./vendor/bin/sail up -d
 ~~~
@@ -23,3 +23,10 @@ php artisan db:seed
 ~~~~
 php artisan migrate:refresh --seed
 ~~~~
+
+### 3. Rodando o frontend com Vite
+- Dentro do container de frontend
+~~~~
+npm run dev
+~~~~
+
