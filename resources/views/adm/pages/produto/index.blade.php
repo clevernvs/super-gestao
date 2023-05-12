@@ -9,24 +9,12 @@
         <h1 class="text-center">Listagem de Produtos</h1>
     </div>
 
-    @component('adm.components.navbar-produto')
-    @endcomponent
-
-    {{-- <div class="row">
-        <div class="col">
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid">
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('produtos.index') }}">Novo</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('produtos.create') }}">Criar</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('fornecedor.listar') }}">Consulta</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+    <div class="row">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a class="btn btn-primary me-md-2"  href="{{ route('produtos.create') }}"><i class="bi bi-plus-circle-fill"></i> Novo</a>
+            <a class="btn btn-primary me-md-2"  href="#"><i class="bi bi-search"></i> Consulta</a>
         </div>
-    </div> --}}
+    </div>
 
     <div class="row justify-content-md-center mt-3">
         <div class="col">
@@ -35,13 +23,14 @@
                     <tr>
                         <th scope="col">Nome</th>
                         <th scope="col">Descrição</th>
-                        <th scope="col">Fornecedor</th>
-                        <th scope="col">Site (Fornecedor)</th>
+                        {{-- <th scope="col">Fornecedor</th>
+                        <th scope="col">Site (Fornecedor)</th> --}}
                         <th scope="col">Peso</th>
                         <th scope="col">Unidade de Medida (Id)</th>
                         <th scope="col">Comprimento</th>
                         <th scope="col">Altura</th>
                         <th scope="col">Largura</th>
+                        <th scope="col">Pedidos</th>
                         <th scope="col">Ação</th>
                     </tr>
                 </thead>
@@ -50,23 +39,36 @@
                         <tr>
                             <td>{{ $produto->nome }}</td>
                             <td>{{ $produto->descricao }}</td>
-                            <td>{{ $produto->fornecedor->nome }}</td>
-                            <td>{{ $produto->fornecedor->site }}</td>
+                            {{-- <td>{{ $produto->fornecedor->nome }}</td> --}}
+                            {{-- <td>{{ $produto->fornecedor->site }}</td> --}}
                             <td>{{ $produto->peso }}</td>
                             <td>{{ $produto->unidade_medida_id }}</td>
                             <td>{{ $produto->itemDetalhe->comprimento ?? '' }}</td>
                             <td>{{ $produto->itemDetalhe->altura ?? '' }}</td>
                             <td>{{ $produto->itemDetalhe->largura ?? '' }}</td>
                             <td>
-                                <a href="{{ route('produtos.show', ['produto' => $produto->id]) }}">Visualizar</a>
-                                <a href="{{ route('produtos.edit', ['produto' => $produto->id]) }}">Editar</a>
-                                <form id="form_{{ $produto->id }}" action="{{ route('produtos.destroy', ['produto' => $produto->id]) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    {{-- <button type="submit">Excluir/button> --}}
-                                    {{-- <a href="">Excluir</a> --}}
-                                    <a href="#" onclick="document.getElementById('form_{{ $produto->id }}').submit()">Excluir</a>
-                                </form>
+                                @foreach ( $produto->pedidos as $pedido )
+                                    <p><a href="{{ route('pedidos-produtos.create', ['pedido' = $pedido->id])}}">Pedido: {{ $pedidos->id }}</a></p>
+                                @endforeach
+                            </td>
+                            <td>
+                                <div class="btn-group mt-2">
+                                    <a class="btn btn-sm text-primary" role="button" aria-disabled="true" href="{{ route('produtos.show', ['produto' => $produto->id]) }}">
+                                        <i class="bi bi-eye-fill"></i>
+                                    </a>
+                                    <a class="btn btn-sm text-primary" role="button" aria-disabled="true" href="{{ route('produtos.edit', ['produto' => $produto->id]) }}">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <form id="form_{{ $produto->id }}" action="{{ route('produtos.destroy', ['produto' => $produto->id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        {{-- <button type="submit">Excluir/button> --}}
+                                        {{-- <a href="">Excluir</a> --}}
+                                        <a class="btn btn-sm text-danger" role="button" aria-disabled="true" href="#" onclick="document.getElementById('form_{{ $produto->id }}').submit()">
+                                            <i class="bi bi-x-circle"></i>
+                                        </a>
+                                    </form>
+                                </div>
                             </td>
 
                         </tr>

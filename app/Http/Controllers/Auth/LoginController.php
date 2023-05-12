@@ -45,7 +45,7 @@ class LoginController extends Controller
         $_SESSION['nome'] = $usuario->name;
         $_SESSION['email'] = $usuario->email;
 
-        return redirect()->route('adm.cliente');
+        return redirect()->route('adm.index');
     }
 
     public function sair()

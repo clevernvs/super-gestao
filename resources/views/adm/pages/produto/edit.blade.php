@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    @component('adm.components.formulario-produto', ['produto' => $produto, 'unidadesMedida' => $unidadesMedida])
+                    @component('adm.components.formulario-cliente', ['produto' => $produto, 'unidadesMedida' => $unidadesMedida, 'fornecedores' => $fornecedores])
                     @endcomponent
 
                 </div>

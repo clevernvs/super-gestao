@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Adm;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProdutoStoreRequest;
+use App\Models\Fornecedor;
 use App\Models\Item;
 use App\Models\Produto;
 use App\Models\ProdutoDetalhe;
@@ -14,11 +15,13 @@ use Illuminate\Http\Request;
 class ProdutoController extends Controller
 {
     public function __construct(
+        protected Fornecedor $fornecedor,
         protected Item $item,
         protected Produto $produto,
         protected ProdutoDetalhe $produtoDetalhe,
         protected UnidadeMedida $unidadeMedida
     ) {
+        $this->fornecedor = $fornecedor;
         $this->produto = $produto;
         $this->produtoDetalhe = $produtoDetalhe;
         $this->unidadeMedida = $unidadeMedida;
@@ -41,12 +44,14 @@ class ProdutoController extends Controller
     public function create()
     {
         $unidadesMedida = $this->unidadeMedida->all();
+        $fornecedores = $this->fornecedor->all();
 
         return view(
             'adm.pages.produto.create',
             [
                 'pageTitle' => 'Adicionar',
-                'unidadesMedida' => $unidadesMedida
+                'unidadesMedida' => $unidadesMedida,
+                'fornecedores' => $fornecedores
             ]
         );
     }
@@ -75,13 +80,15 @@ class ProdutoController extends Controller
     public function edit(Produto $produto)
     {
         $unidadesMedida = $this->unidadeMedida->all();
+        $fornecedores = $this->fornecedor->all();
 
         return view(
             'adm.pages.produto.edit',
             [
                 'pageTitle' => 'Editar',
                 'produto' => $produto,
-                'unidadesMedida' => $unidadesMedida
+                'unidadesMedida' => $unidadesMedida,
+                'fornecedores' => $fornecedores
             ]
         );
     }

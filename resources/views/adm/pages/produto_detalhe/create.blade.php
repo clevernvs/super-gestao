@@ -1,6 +1,6 @@
 @extends('adm.template.basico')
 
-@section('pageTitle', $pageTitle)
+@section('pageTitle', 'Adicionar Detalhes do Produto')
 
 @section('conteudo')
 <div class="container-fluid mt-3">

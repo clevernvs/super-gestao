@@ -8,10 +8,12 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link" href="{{ route('adm.index') }}">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ route('adm.cliente') }}">Clientes</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ route('adm.fornecedor') }}">Fornecedores</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('clientes.index') }}">Clientes</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('pedidos.index') }}">Pedidos</a></li>
+            {{-- <li class="nav-item"><a class="nav-link" href="{{ route('fornecedores.index') }}">Fornecedores</a></li> --}}
             <li class="nav-item"><a class="nav-link" href="{{ route('produtos.index') }}">Produtos</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ route('adm.sair') }}">Sair</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('adm.sair') }}"><i class="bi bi-box-arrow-right"></i></a>
+            </li>
         </ul>
     </div>
 </nav>
